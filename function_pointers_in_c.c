@@ -18,4 +18,5 @@ int main()
 	printf("%f, %f\n", sum(3,4), fun_ptr(4,5));
 
 	return 0;
+	
 }
