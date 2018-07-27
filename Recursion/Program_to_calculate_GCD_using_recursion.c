@@ -29,35 +29,36 @@ int calculateGCD(int n1, int n2)
 
 		return GCD * calculateGCD(n1, n2);
 	}
-
+	
+	if (n1 < n2)
+		limit = sqrt(n1)+1;
 	else
+		limit = sqrt(n2)+1;
+
+	int flag = 0;
+
+	for (int i = 2; i <= limit; i++)
 	{
-		if (n1 < n2)
-			limit = sqrt(n1);
-		else
-			limit = sqrt(n2)+1;
-
-		for (int i = 2; i <= limit; i++)
+		if ((n1 % i == 0) && (n2 % i == 0))
 		{
-			if ((n1 % i == 0) && (n2 % i == 0))
-			{
-				GCD *= i;
-				n1 /= i;
-				n2 /= i;
-
-				return GCD * calculateGCD(n1, n2);
-			}
-		}
-
-		return 1;
+			flag = 1;
+			GCD *= i;
+			n1 /= i;
+			n2 /= i;			
+		}		
 	}
+	if (!flag)
+		return GCD*1;
+	else
+		// printf("GD: %d", GCD);
+		return calculateGCD(n1, n2);
 }
 
 int main()
 {
-	int num1 = 64, num2 = 60;
+	int num1 = 420, num2 = 360;
 
-	printf("GCD: \n\n%d\n\n", calculateGCD(num1, num2));
+	printf("GCD of %d and %d: %d\n", calculateGCD(num1, num2));
 
 	return 0;
 }
